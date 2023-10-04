@@ -1,3 +1,6 @@
+/*
+
+
 let nombre = prompt("Ingrese su nombre");
 
 let apellido = prompt("Apellido?");
@@ -51,9 +54,7 @@ if (inversion == true) {
   let transaccion = prompt(
     " donde desea que el dinero sea depositado?, Cuenta bancaria, efectivo o plazo fijo"
   );
-  /*
-  let deposito = prompt(" su dinero sera transferido a: " + transaccion);
-*/
+
   switch (transaccion) {
     case "cuenta bancaria":
       alert(
@@ -77,4 +78,40 @@ if (inversion == true) {
         "No tenemos disponible esa opcion, para cualquier consulta llame al 0800-111-5050, gracias"
       );
   }
+}
+
+
+*/
+
+const usuarioJefe = {
+  nombre: "Rafael",
+  apellido: "Rossi",
+  Edad: 24,
+  Trabajo: "Guardavidas",
+  saldo: 200000,
+};
+
+class usuario {
+  constructor(nombre, apellido, trabajo, saldo) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.trabajo = trabajo;
+    this.saldo = saldo;
+  }
+}
+
+const usuario1 = new usuario("Rafael", "Rossi", 24, 300000);
+const usuario2 = new usuario("Nahir", "Gomez", 23, 500000);
+const usuario3 = new usuario("Esteban", "Garcia", 36, 30000);
+
+console.log(usuario3.saldo);
+
+if ("saldo" in usuario3) {
+  saldo <= 30000;
+} else {
+  ("No hay saldo suficiente para comprar");
+}
+if (saldo >= 30000) {
+} else {
+  ("Que moneda desea comprar?");
 }
