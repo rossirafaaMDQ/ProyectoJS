@@ -1,6 +1,3 @@
-/*
-
-
 let nombre = prompt("Ingrese su nombre");
 
 let apellido = prompt("Apellido?");
@@ -80,13 +77,9 @@ if (inversion == true) {
   }
 }
 
-
-*/
-
 const usuarioJefe = {
   nombre: "Rafael",
   apellido: "Rossi",
-  Edad: 24,
   Trabajo: "Guardavidas",
   saldo: 200000,
 };
@@ -100,9 +93,9 @@ class usuario {
   }
 }
 
-const usuario1 = new usuario("Rafael", "Rossi", 24, 300000);
-const usuario2 = new usuario("Nahir", "Gomez", 23, 500000);
-const usuario3 = new usuario("Esteban", "Garcia", 36, 30000);
+const usuario1 = new usuario("Marcelo", "Rossi", "Guardavidas", 700000);
+const usuario2 = new usuario("Nahir", "Gomez", "Abogada", 200000);
+const usuario3 = new usuario("Esteban", "Garcia", "", 30000);
 
 console.log(usuario3.saldo);
 
@@ -111,7 +104,15 @@ if ("saldo" in usuario3) {
 } else {
   ("No hay saldo suficiente para comprar");
 }
-if (saldo >= 30000) {
+if (saldo > 30000) {
 } else {
   ("Que moneda desea comprar?");
 }
+
+if ("trabajo" in usuario3) {
+  console.log(usuario3.trabajo);
+} else {
+  ("No tiene trabajo, de lo contrario comunicarse con personal. Muchas gracias");
+}
+
+console.log(usuario3.trabajo);
