@@ -1,5 +1,4 @@
 let nombre = prompt("Ingrese su nombre");
-
 let apellido = prompt("Apellido?");
 
 if (nombre.trim() === "") {
@@ -116,3 +115,14 @@ if ("trabajo" in usuario3) {
 }
 
 console.log(usuario3.trabajo);
+
+const alertaForm = document.querySelector("#alerta-form");
+const alertaInput = document.querySelector("#alerta-input");
+
+alertaInput.addEventListener("input", () => {
+  console.log(alertaInput.value);
+});
+
+localStorage.setItem("Jefe", usuarioJefe);
+localStorage.setItem("usuario", usuario1);
+localStorage.setItem("Dolar", dolarHoy);
