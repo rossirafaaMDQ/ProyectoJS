@@ -1,0 +1,86 @@
+:root {
+  --orange: #d95550;
+  --lightOrange: #dd6662;
+  --veryLightOrange: #f89e8b;
+  --gray: #55557b;
+  --white: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Verdana, sans-serif;
+  background-color: var(--orange);
+}
+.logo {
+  width: 300px;
+  position: absolute;
+  top: 0px;
+  right: 30px;
+}
+h1 {
+  margin-top: 200px;
+  color: var(--white);
+  text-align: center;
+}
+form {
+  /* border: 1px solid; */
+  max-width: 400px;
+  margin: 45px auto;
+  text-align: center;
+}
+form input[type="text"] {
+  background-color: var(--orange);
+  color: var(--white);
+  border-style: none;
+  font-size: 1.5em;
+}
+form input[type="text"]::placeholder {
+  color: var(--veryLightOrange);
+}
+form input[type="text"]:focus {
+  outline: none;
+}
+form input[type="submit"] {
+  color: var(--orange);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-style: none;
+  font-size: 2em;
+}
+form input[type="submit"]:hover {
+  background-color: var(--veryLightOrange);
+  cursor: pointer;
+  color: white;
+}
+.list-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.task-container {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  padding: 16px;
+  color: var(--gray);
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.closeBtn {
+  width: 15px;
+  height: 15px;
+}
+.closeBtn:hover {
+  cursor: pointer;
+}
+#stats {
+  margin: 25px 0 50px;
+  color: #ffe5d2;
+  text-align: center;
+  font-size: 1.3em;
+}
