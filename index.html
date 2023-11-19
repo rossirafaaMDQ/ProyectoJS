@@ -1,33 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Banco Money</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Overpass&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/login.css" />
+
+    <title>Login</title>
   </head>
+
   <body>
-    <h1>Banco Money</h1>
-
-    <h1>Clientes</h1>
-
-    <form action="#" id="userInput">
-      <input type="text" placeholder="Añade al cliente..." autofocus />
-      <input type="submit" value="+" id="addBtn" />
-    </form>
-
-    <div id="list" class="list-container">
-      <div class="task-container" id="uno">
-        <label>
-          <input type="checkbox" />
-          Lista de clientes para pedidos de hoy...
-        </label>
-        <img src="./images/delete.png" class="closeBtn" />
+    <div id="contenedor">
+      <div id="central">
+        <div id="login">
+          <div class="titulo">Bienvenido Instituto X Inventario inmuebles</div>
+          <form id="loginform">
+            <label for="usuario">Usuario:</label>
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              required
+            /><br /><br />
+            <label for="contraseña">Contraseña:</label>
+            <input
+              type="password"
+              id="contraseña"
+              name="contraseña"
+              required
+            /><br /><br />
+            <button type="button" onclick="verificarCredenciales()">
+              Iniciar Sesión
+            </button>
+          </form>
+          <div class="pie-form">
+            <a href="#">¿Perdiste tu contraseña?</a>
+            <a href="#">¿No tienes Cuenta? Registrate</a>
+          </div>
+        </div>
+        <div class="inferior"></div>
       </div>
     </div>
-    <div id="stats"></div>
-
-    <script src="./main.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>
