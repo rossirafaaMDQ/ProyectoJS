@@ -34,7 +34,7 @@ function verificarCredenciales() {
       },
     }).fire({
       icon: "error",
-      title: "Credenciales incorrectas",
+      title: "Digitos incorrectos",
     });
   }
 }

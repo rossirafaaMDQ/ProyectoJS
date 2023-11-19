@@ -1,50 +1,28 @@
-let IdCounter = 0;
-const input = document.querySelector('input[type="text"]');
-
-userInput.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (input.value.trim().length != 0) {
-    addTask();
-  }
-});
-
-let addTask = () => {
-  IdCounter++;
-
-  //Recoger Texto
-  let newValue = input.value;
-
-  //Agregar cliente
-  const newTask = `
-        <div class="task-container" id="${IdCounter}">
-            <label>
-                <input type="checkbox"> 
-                ${newValue}
-            </label>
-            <img src="./images/delete.png" class="closeBtn">
-        </div>
-    `;
-  list.innerHTML += newTask;
-  input.value = "";
-  updateStats();
+const stockmanager = function (item, nombre, marca, stock, precio) {
+  this.item = item;
+  this.nombre = nombre;
+  this.marca = marca;
+  this.stock = stock;
+  this.precio = precio;
+  this.lugar = lugar;
+  this.observacion = observacion;
 };
 
-list.addEventListener("click", (event) => {
-  if (event.srcElement.nodeName == "INPUT") {
-    updateStats();
-  } else if (event.srcElement.nodeName == "IMG") {
-    deleteTask(event.srcElement.parentNode.id);
-  }
-});
+const formModal = document.getElementById("modal-container");
+const closeFormButton = document.getElementById("cerrar-modal");
 
-let updateStats = () => {
-  let element = list.querySelectorAll("div");
-  let checkbox = document.querySelectorAll('input[type="checkbox"]:checked');
-  stats.innerHTML = `Clientes pendientes: ${element.length} Completo: ${checkbox.length}`;
-};
+let list = new stockmanager(
+  "ID",
+  "Nombre",
+  "Marca",
+  "Stock",
+  "Precio",
+  "Lugar",
+  "Observación"
+);
+let bien1 = new stockmanager(0, "", "", "", "", "", "");
+let inventario = [];
+inventario.push(bien1);
 
-let deleteTask = (id) => {
-  let taskToDelete = document.getElementById(id);
-  list.removeChild(taskToDelete);
-  updateStats();
-};
+const nombreUsuario = sessionStorage.getItem("nombreUsuario");
+const nombreUsuarioDiv = document.getElementById("nombreUsuarioDiv");
