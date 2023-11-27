@@ -2,7 +2,7 @@ function verificarCredenciales() {
   const usuario = document.getElementById("usuario").value.toLowerCase();
   const contraseña = document.getElementById("contraseña").value;
   console.log(usuario);
-  if (usuario === "Rafamdp" && contraseña === "coder123") {
+  if (usuario === "rafita" && contraseña === "coder") {
     Swal.mixin({
       toast: true,
       position: "top",

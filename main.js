@@ -208,7 +208,7 @@ inventario.forEach((producto, index) => {
       Swal.fire({
         title: "Modificar Producto",
         html: `
-    <div><label for="nombre">Nombre Inmueble: </label>
+    <div><label for="nombre">Nombre producto: </label>
     <input id="nombre" type="text" required value="${producto.nombre}">
    </div> <br>
     <div><label for="marca">Marca:</label>
@@ -356,7 +356,7 @@ function agregarProducto() {
   resultado.innerHTML = "";
   const form = document.createElement("form");
   form.innerHTML = `
-  <div class="addlabel"><label for="nombre-input">Nombre Inmueble: </label>
+  <div class="addlabel"><label for="nombre-input">Nombre stockmanager: </label>
   <input id="nombre-input" type="text" required>
  </div> <br>
   <div class="addlabel"><label for="marca-input">Marca: </label>
@@ -420,7 +420,7 @@ function agregarProducto() {
     }
   });
 
-  const producto = new Inmueble(
+  const producto = new stockmanager(
     itemInput,
     nombreInput,
     marcaInput,
@@ -440,10 +440,182 @@ function agregarProducto() {
 
   inventario.push(producto);
 
-  localStorage.setItem("Inmueble", JSON.stringify(inventario));
+  localStorage.setItem("stockmanager", JSON.stringify(inventario));
 
   Swal.fire({
     icon: "success",
     title: `Se ha agregado el producto "${producto.nombre}" a la lista.`,
   });
+}
+
+const resultadoTable = document.getElementById("resultado");
+resultadoTable.innerHTML = "";
+const newRow = resultadoTable.insertRow();
+console.table(inventario.length);
+if (inventario.length > 0) {
+  for (let x in list) {
+    const celda = newRow.insertCell();
+    celda.textContent = list[x];
+  }
+  inventario.forEach((producto) => {
+    if (producto.item > 0) {
+      const row = resultadoTable.insertRow();
+      const itemCell = row.insertCell(0);
+      const nombreCell = row.insertCell(1);
+      const marcaCell = row.insertCell(2);
+      const stockCell = row.insertCell(3);
+      const precioCell = row.insertCell(4);
+      const lugarCell = row.insertCell(5);
+      const observacionCell = row.insertCell(6);
+
+      itemCell.textContent = producto.item;
+      nombreCell.textContent = producto.nombre;
+      marcaCell.textContent = producto.marca;
+      stockCell.textContent = producto.stock;
+      precioCell.textContent = producto.precio;
+      lugarCell.textContent = producto.lugar;
+      observacionCell.textContent = producto.observacion;
+    }
+  });
+} else {
+  Swal.fire({
+    icon: "warning",
+    title: "No se encuentran coincidencias",
+  });
+}
+formModal.style.display = "none";
+form.remove();
+
+///////////////////////////////////////////////////////////////////////////////////
+
+fetch("https://mindicador.cl/api")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (dailyIndicators) {
+    const indicators = [
+      { name: "UF", value: dailyIndicators.uf.valor },
+      { name: "Dólar observado", value: dailyIndicators.dolar.valor },
+      { name: "Dólar acuerdo", value: dailyIndicators.dolar_intercambio.valor },
+      { name: "Euro", value: dailyIndicators.euro.valor },
+      { name: "UTM", value: dailyIndicators.utm.valor },
+      { name: "UF", value: dailyIndicators.uf.valor },
+      { name: "Dólar observado", value: dailyIndicators.dolar.valor },
+      { name: "Dólar acuerdo", value: dailyIndicators.dolar_intercambio.valor },
+      { name: "Euro", value: dailyIndicators.euro.valor },
+      { name: "UTM", value: dailyIndicators.utm.valor },
+    ];
+
+    indicators.forEach(function (indicator, index) {
+      const indicatorDiv = document.querySelector(`.slide${index + 1}`);
+      indicatorDiv.innerHTML = `
+        <div class="indicator-name">${indicator.name} <br> $${indicator.value}</br></div>
+           `;
+    });
+  })
+  .catch(function (error) {
+    console.log("Solicitud fallida", error);
+  });
+
+function totalmanager() {
+  const resultadoTable = document.getElementById("resultado");
+  resultadoTable.innerHTML = "";
+
+  let totalValorActivos = 0;
+
+  inventario.forEach((item) => {
+    const itemPrecio = parseFloat(item.precio);
+    const itemStock = parseInt(item.stock);
+
+    if (!isNaN(itemPrecio) && !isNaN(itemStock)) {
+      totalValorActivos += itemPrecio * itemStock;
+    }
+  });
+
+  const grafico = document.createElement("div");
+  grafico.innerHTML = `
+      <h1>Valor total de activos: $${totalValorActivos}</h1>
+    `;
+
+  resultadoTable.appendChild(grafico);
+}
+
+function totalStock() {
+  const resultadoTable = document.getElementById("resultado");
+  resultadoTable.innerHTML = "";
+
+  let totalStock = 0;
+  inventario.forEach((item) => {
+    const itemStock = parseFloat(item.stock);
+    if (!isNaN(itemStock)) {
+      totalStock += itemStock;
+    }
+  });
+  const grafico = document.createElement("div");
+  grafico.innerHTML = `
+       <h1>Total de items: ${totalStock}</h1>
+           `;
+
+  resultado.appendChild(grafico);
+}
+
+function ultimosAgregados() {
+  const resultadoTable = document.getElementById("resultado");
+
+  resultadoTable.innerHTML = "";
+  if (inventario.length > 2) {
+    let ultimosDosstock = [
+      inventario[inventario.length - 2],
+      inventario[inventario.length - 1],
+    ];
+
+    let tablaHtml = "<table><tr>";
+    for (const x in ultimosDosstock[0]) {
+      tablaHtml += `<th>${x}</th>`;
+    }
+    tablaHtml += "</tr>";
+
+    for (const bien of ultimosDosstock) {
+      tablaHtml += "<tr>";
+      for (const x in bien) {
+        tablaHtml += `<td>${bien[x]}</td>`;
+      }
+      tablaHtml += "</tr>";
+    }
+
+    tablaHtml += "</table>";
+
+    document.getElementById("resultado").innerHTML = tablaHtml;
+  } else {
+    Swal.fire({
+      icon: "warning",
+      title: "Advertencia",
+      text: "No hay suficientes elementos en el inventario para mostrar los últimos 2.",
+    });
+  }
+}
+
+function panel() {
+  const div1 = document.getElementById("div1");
+  div1.innerHTML = "";
+  const resultadoTable = document.getElementById("resultado");
+  resultadoTable.innerHTML = "";
+
+  const btnTotalproductos = document.createElement("button");
+  btnTotalproductos.textContent = "Total Productos";
+  btnTotalproductos.addEventListener("click", totalmanager);
+  btnTotalproductos.classList.add("botonpanel");
+
+  const btnTotalStock = document.createElement("button");
+  btnTotalStock.textContent = "Total Stock";
+  btnTotalStock.addEventListener("click", totalStock);
+  btnTotalStock.classList.add("botonpanel");
+
+  const btnUltimosAgregados = document.createElement("button");
+  btnUltimosAgregados.textContent = "Últimos Agregados";
+  btnUltimosAgregados.addEventListener("click", ultimosAgregados);
+  btnUltimosAgregados.classList.add("botonpanel");
+  div1.appendChild(btnTotalproductos);
+  div1.appendChild(btnTotalStock);
+  div1.appendChild(btnUltimosAgregados);
 }
